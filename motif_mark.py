@@ -155,7 +155,7 @@ def create_drawing(coordinates_dictionary, longest_intron, motif_list, sequence_
         color_palette['catag'] = [0.0, 1, 0.0, 1] # Green
         color_palette['YYYYYYYYYY'] = [0.0, 0.0, 1, 1] # Blue
 
-        motif_count = 0
+        motif_index = 0
         # Create a legend for the motifs and a box representing their colors.
         for name in motif_list:
             if name == 'GCATG':
@@ -163,10 +163,10 @@ def create_drawing(coordinates_dictionary, longest_intron, motif_list, sequence_
             if name == 'cauag':
                 continue
 
-            motif_height = motif_count * 15 + 20
+            motif_height = motif_index * 35
             cxt.set_source_rgba(color_palette[name][0], color_palette[name][1], color_palette[name][2], color_palette[name][3])
             cxt.set_line_width(3)
-            cxt.rectangle(10, motif_height, 15, 10)
+            cxt.rectangle(10, motif_height, 15, 15)
             cxt.fill()
 
             cxt.set_source_rgb(0.1, 0.1, 0.1)
@@ -174,15 +174,15 @@ def create_drawing(coordinates_dictionary, longest_intron, motif_list, sequence_
             cxt.set_font_size(15)
             cxt.move_to(28, motif_height + 10)
             cxt.show_text(name)
-            motif_count += 1
+            motif_index += 1
 
-        gene_count = 0
+        gene_index = 0
         # Draw an image for each gene from the FASTA input file.
         for key in sequence_dictionary:
 
             # Draw intron line (black line)
             sequence_length = len(sequence_dictionary[key])
-            gene_height = 100 + (gene_count * 150)
+            gene_height = 100 + (gene_index * 150)
             cxt.set_source_rgb(0.1, 0.1, 0.1)
             cxt.set_line_width(3)
             cxt.move_to(left_border, gene_height)
@@ -200,7 +200,7 @@ def create_drawing(coordinates_dictionary, longest_intron, motif_list, sequence_
             cxt.stroke()
 
             # Create a title for each gene using its header line.
-            header_height = 45 + (gene_count * 150)
+            header_height = 45 + (gene_index * 150)
             cxt.set_source_rgb(0.1, 0.1, 0.1)
             cxt.select_font_face("Purisa", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
             cxt.set_font_size(25)
@@ -222,7 +222,7 @@ def create_drawing(coordinates_dictionary, longest_intron, motif_list, sequence_
                     cxt.move_to(left_border + motif_tuple[0], gene_height - 20)
                     cxt.line_to(left_border + motif_tuple[0], gene_height  + 20)
                     cxt.stroke()
-            gene_count += 1
+            gene_index += 1
 
 def main():
 
