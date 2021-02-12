@@ -9,7 +9,7 @@ import cairo
 import argparse
 
 def argument_parser():
-    '''Return parser object.'''
+    '''Returns parser object'''
     # Create parser object.
     parser = argparse.ArgumentParser()
 
@@ -21,6 +21,7 @@ def argument_parser():
     return parser.parse_args()
 
 def get_motif_coordinates(motif, sequence):
+    '''Returns a list of tuples specifying the motif coordinates'''
     coordinate_tuples = []
 
     for match in re.finditer(motif, sequence, re.IGNORECASE):
@@ -294,5 +295,4 @@ def main():
             longest_intron = length
             gene_name = gene
     create_drawing(coordinates_dictionary, longest_intron, motif_list, sequence_dictionary)
- 
 main()
